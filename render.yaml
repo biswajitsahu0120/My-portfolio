@@ -8,7 +8,6 @@ services:
     plan: free
     repo: https://github.com/biswajitsahu0120/My-portfolio
     branch: main
-    rootDir: portfolio-biswajit
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     headers:
