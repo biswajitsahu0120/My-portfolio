@@ -1,14 +1,15 @@
-# render.yaml — Render static site deployment configuration
-# Docs: https://render.com/docs/infrastructure-as-code
+# render.yaml — Render STATIC SITE deployment configuration
+# Docs: https://render.com/docs/static-sites
 
 services:
   - type: web
     name: biswajit-portfolio
     env: static
     plan: free
-    repo: https://github.com/<YOUR_GITHUB_USERNAME>/portfolio-biswajit   # ← replace with your repo URL
+    repo: https://github.com/biswajitsahu0120/My-portfolio
     branch: main
-    buildCommand: npm ci && npm run build
+    rootDir: portfolio-biswajit
+    buildCommand: npm install && npm run build
     staticPublishPath: dist
     headers:
       - path: /*
@@ -24,7 +25,6 @@ services:
         name: Cache-Control
         value: public, max-age=31536000, immutable
     routes:
-      # SPA fallback — all paths serve index.html
       - type: rewrite
         source: /*
         destination: /index.html
