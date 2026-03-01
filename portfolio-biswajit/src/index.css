@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Resets & Scrollbar ──────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --color-accent: #00d1c1;
+    --color-accent-dark: #00a89a;
+    --color-bg: #0b0f12;
+    --color-bg-card: #111720;
+    --color-text: #e2e8f0;
+    --color-muted: #64748b;
+    scroll-behavior: smooth;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+    background-color: #0b0f12;
+    color: #e2e8f0;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0f12;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #00d1c1;
+    border-radius: 3px;
+  }
+
+  /* Focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid #00d1c1;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ─── Utility / Component Classes ──────────────────────────────────────────── */
+@layer components {
+  /* Section container */
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section heading with accent underline */
+  .section-heading {
+    @apply text-3xl md:text-4xl font-bold text-white mb-3;
+  }
+
+  .section-heading span {
+    color: var(--color-accent);
+  }
+
+  .section-divider {
+    @apply h-1 w-16 rounded-full mb-10;
+    background: var(--color-accent);
+  }
+
+  /* Glass card */
+  .glass-card {
+    background: rgba(17, 23, 32, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 209, 193, 0.12);
+    border-radius: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .glass-card:hover {
+    border-color: rgba(0, 209, 193, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 209, 193, 0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Accent button */
+  .btn-accent {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200;
+    background: var(--color-accent);
+    color: #0b0f12;
+  }
+  .btn-accent:hover {
+    background: var(--color-accent-dark);
+    box-shadow: 0 0 20px rgba(0, 209, 193, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm border transition-all duration-200;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: rgba(0, 209, 193, 0.1);
+    box-shadow: 0 0 16px rgba(0, 209, 193, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Skill pill */
+  .skill-pill {
+    @apply text-xs font-medium px-3 py-1 rounded-full;
+    background: rgba(0, 209, 193, 0.1);
+    color: var(--color-accent);
+    border: 1px solid rgba(0, 209, 193, 0.2);
+  }
+
+  /* Tech tag (hero) */
+  .tech-tag {
+    @apply text-sm font-medium px-4 py-1.5 rounded-full;
+    background: rgba(0, 209, 193, 0.08);
+    color: var(--color-accent);
+    border: 1px solid rgba(0, 209, 193, 0.2);
+  }
+
+  /* Timeline connector */
+  .timeline-dot {
+    @apply absolute left-0 top-1.5 w-3 h-3 rounded-full border-2;
+    border-color: var(--color-accent);
+    background: #0b0f12;
+    box-shadow: 0 0 8px rgba(0, 209, 193, 0.4);
+  }
+}
+
+/* ─── Reveal Animation ──────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Hero gradient blob ─────────────────────────────────────────────────────  */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Neon glow text ─────────────────────────────────────────────────────────  */
+.neon-text {
+  color: var(--color-accent);
+  text-shadow: 0 0 20px rgba(0, 209, 193, 0.5);
+}
+
+/* ─── Profile image ring ─────────────────────────────────────────────────────  */
+/* Static teal gradient border — no spin. Hover: gentle scale + glow.          */
+.profile-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00d1c1 0%, #0b0f12 50%, #00d1c1 100%);
+  border-radius: 50%;
+  padding: 3px;
+  box-sizing: border-box;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  flex-shrink: 0;
+}
+
+.profile-ring > div {
+  /* Inner circle — fills ring perfectly */
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111720;
+  /* Needed so the img fills correctly */
+  position: relative;
+}
+
+.profile-ring > div > img {
+  /*
+   * Image is 1024×1536 (portrait 2:3).
+   * object-cover scales width to fill circle → height overflows by 144px (at lg=288px).
+   * object-position: center 12% shifts down just enough to show
+   * face + upper chest + arm tips inside the circle at all responsive sizes.
+   * Adjust this single value if you swap photos:
+   *   0%  = very top of image (forehead edge)
+   *   10% = face centered with forehead slightly cropped
+   *   15% = face + shoulder + arms comfortably centred  ← use this
+   *   50% = default (shows body mid-section, face cut off)
+   */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+}
+
+.profile-ring:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 32px rgba(0, 209, 193, 0.45), 0 0 64px rgba(0, 209, 193, 0.15);
+}
+
+/* ─── Section background stripes ─────────────────────────────────────────────  */
+.bg-section-alt {
+  background: #0e1318;
+}
+
+/* ─── Cookie Banner ─────────────────────────────────────────────────────────── */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #111720;
+  border-top: 1px solid rgba(0, 209, 193, 0.2);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* ─── Input styles ───────────────────────────────────────────────────────────  */
+.form-input {
+  @apply w-full rounded-lg px-4 py-3 text-sm text-white transition-all duration-200;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 209, 193, 0.15);
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 209, 193, 0.1);
+}
+
+.form-input::placeholder {
+  color: #475569;
+}
+

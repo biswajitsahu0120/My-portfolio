@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output — never commit, Render builds this on deploy
+dist/
+dist-ssr/
+
+# Local env files — never commit real secrets
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Vite cache
+.vite/
